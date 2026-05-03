@@ -1,15 +1,15 @@
 import json
 from datetime import datetime
 
-def treat_neo_data(rawData):
+def treat_neo_data(raw_data):
     #near_earth_objects->'2024-01-02'->[lista]
-    if not rawData:
+    if not raw_data:
         return [], []
 
-    asteroidData = []
-    closeAproachesData = []
+    asteroid_data = []
+    close_aproaches_data = []
 
-    sample = rawData['near_earth_objects']
+    sample = raw_data['near_earth_objects']
 
     for day in sample:
         for asteroid in sample[day]:
@@ -26,7 +26,7 @@ def treat_neo_data(rawData):
                        float(asteroid['close_approach_data'][0]['miss_distance']['kilometers']),
                        asteroid['close_approach_data'][0]['orbiting_body']
             )
-            asteroidData.append(tmp_ast)
-            closeAproachesData.append(tmp_cap)
+            asteroid_data.append(tmp_ast)
+            close_approaches_data.append(tmp_cap)
 
-    return asteroidData, closeAproachesData
+    return asteroid_data, close_approaches_data
