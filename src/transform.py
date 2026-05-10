@@ -4,10 +4,10 @@ from datetime import datetime
 def treat_neo_data(raw_data):
     #near_earth_objects->'2024-01-02'->[lista]
     if not raw_data:
-        return [], []
+        return None
 
     asteroid_data = []
-    close_aproaches_data = []
+    close_approaches_data = []
 
     sample = raw_data['near_earth_objects']
 
@@ -21,7 +21,7 @@ def treat_neo_data(raw_data):
                        float(asteroid['estimated_diameter']['kilometers']['estimated_diameter_max'])
 	    )
             tmp_cap = (asteroid['id'],
-                       asteroid['close_approach_data'][0]['close_approach_date'],
+                       datetime.strptime(asteroid['close_approach_data'][0]['close_approach_date'],'%Y-%m-%d'),
                        float(asteroid['close_approach_data'][0]['relative_velocity']['kilometers_per_hour']),
                        float(asteroid['close_approach_data'][0]['miss_distance']['kilometers']),
                        asteroid['close_approach_data'][0]['orbiting_body']
